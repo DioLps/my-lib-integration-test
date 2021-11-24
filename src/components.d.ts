@@ -8,17 +8,17 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyComponent {
         /**
-          * The first name
+          * The card's btnSubmitLabel
          */
-        "first": string;
+        "btnSubmitLabel": string;
         /**
-          * The last name
+          * The card's description
          */
-        "last": string;
+        "description": string;
         /**
-          * The middle name
+          * The card's title
          */
-        "middle": string;
+        "myTitle": string;
     }
 }
 declare global {
@@ -35,17 +35,21 @@ declare global {
 declare namespace LocalJSX {
     interface MyComponent {
         /**
-          * The first name
+          * The card's btnSubmitLabel
          */
-        "first"?: string;
+        "btnSubmitLabel"?: string;
         /**
-          * The last name
+          * The card's description
          */
-        "last"?: string;
+        "description"?: string;
         /**
-          * The middle name
+          * The card's title
          */
-        "middle"?: string;
+        "myTitle"?: string;
+        /**
+          * The card's submitted event
+         */
+        "onSubmitted"?: (event: CustomEvent<void>) => void;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

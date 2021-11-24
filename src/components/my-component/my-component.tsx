@@ -1,32 +1,48 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'my-component',
-  styleUrl: 'my-component.css',
+  styleUrl: 'my-component.scss',
   shadow: true,
 })
 export class MyComponent {
   /**
-   * The first name
+   * The card's title
    */
-  @Prop() first: string;
+  @Prop() myTitle: string;
 
   /**
-   * The middle name
+   * The card's description
    */
-  @Prop() middle: string;
+  @Prop() description: string;
 
   /**
-   * The last name
+   * The card's btnSubmitLabel
    */
-  @Prop() last: string;
+  @Prop() btnSubmitLabel: string;
 
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  /**
+   * The card's submitted event
+   */
+  @Event() submitted: EventEmitter<void>;
+
+  public onSubmit(): void {
+    this.submitted.emit();
   }
 
-  render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+  public render(): any {
+    return (
+      <section class="my-component">
+        {this.myTitle ? <h3 class="my-component__title">{this.myTitle}</h3> : ''}
+        {this.description ? <p class="my-component__description">{this.description}</p> : ''}
+        {this.btnSubmitLabel ? (
+          <button class="my-component__submit" onClick={() => this.onSubmit()}>
+            {this.btnSubmitLabel}
+          </button>
+        ) : (
+          ''
+        )}
+      </section>
+    );
   }
 }
